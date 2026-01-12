@@ -23,7 +23,7 @@ const PostFoundItems = () => {
   };
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
+    setImage(e.target.files[0]);  
   };
 
   const handleSubmit = async (e) => {
@@ -43,7 +43,7 @@ const PostFoundItems = () => {
       if (image) {
         data.append("image", image);
       }
-
+                  
       const response = await axios.post(
        "/found-items",
         data,

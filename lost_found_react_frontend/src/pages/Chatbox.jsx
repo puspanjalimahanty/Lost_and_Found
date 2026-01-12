@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import io from "socket.io-client";
 
-const socket = io("http://localhost:5000"); // ✅ socket connection
+const socket = io("https://findmystuff-backend.onrender.com");
+ // ✅ socket connection
 
 const Chatbox = () => {
   const { itemId } = useParams();
