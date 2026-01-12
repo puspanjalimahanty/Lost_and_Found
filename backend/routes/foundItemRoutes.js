@@ -19,7 +19,7 @@ if (!fs.existsSync(uploadDir)) {
 // ✅ Multer setup
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploadDir'); // Save under /uploads/found-items
+    cb(null, uploadDir); // Save under /uploads/found-items
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1E9)}`;
