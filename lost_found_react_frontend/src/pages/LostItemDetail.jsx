@@ -1,18 +1,21 @@
 // src/pages/LostItemDetail.jsx
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import axios from "../utils/axios";
 
 const LostItemDetail = () => {
   const { id } = useParams(); // Lost Item ID from URL
   const navigate = useNavigate();
   const [item, setItem] = useState(null);
 
+  const BACKEND_URL = process.env.REACT_APP_API_URL;
+
+
   useEffect(() => {
     const fetchItem = async () => {
       try {
         console.log("Fetching item with ID:", id);
-        const res = await axios.get(`http://localhost:5000/api/lost-items/${id}`);
+        const res = await axios.get(`/lost-items/${id}`);
         setItem(res.data);
       } catch (error) {
         console.error("Error fetching item:", error);
@@ -32,7 +35,7 @@ const LostItemDetail = () => {
       <img
         src={
           item.imagePath
-            ? `http://localhost:5000/${item.imagePath}`
+            ? `${BACKEND_URL}/${item.imagePath}`
             : "https://via.placeholder.com/150"
         }
         alt={item.itemName}

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import axios from "../utils/axios";
 import "./FoundItemsList.css"; // Import normal CSS
 
 const ViewFoundItems = () => {
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
+  const BACKEND_URL = process.env.REACT_APP_API_URL;
+
 
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/found-items");
+        const res = await axios.get("/found-items");
         setItems(res.data);
       } catch (err) {
         console.error("Error fetching found items:", err);
@@ -30,7 +32,7 @@ const ViewFoundItems = () => {
             <div key={item._id} className="found-card">
               {item.imagePath && (
                 <img
-                  src={`http://localhost:5000/${item.imagePath}`}
+                  src={`${BACKEND_URL}/${item.imagePath}`}
                   alt={item.itemName}
                   className="found-image"
                 />

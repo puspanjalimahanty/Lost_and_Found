@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../utils/axios";
 import './PostFoundItem.css';
 import { useNavigate } from "react-router-dom";
 
@@ -45,7 +45,7 @@ const PostFoundItems = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:5000/api/found-items",
+       "/found-items",
         data,
         {
           headers: {

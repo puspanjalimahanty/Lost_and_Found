@@ -15,31 +15,33 @@ const PostLostItem = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!image) return alert("Please select an image");
+
+    if (!image) {
+      alert("Please select an image");
+      return;
+    }
 
     const formData = new FormData();
     formData.append("itemName", itemName);
     formData.append("description", description);
     formData.append("dateLost", dateLost);
     formData.append("location", location);
-    formData.append("image", image); // 👈 name must match multer field
+    formData.append("image", image); // must match multer field name
 
     try {
-        
-      const token = localStorage.getItem("token"); // Assuming you stored JWT here
-      console.log("📦 Token before request:", token);
-      const res = await axios.post("http://localhost:5000/api/lost-items", formData, {
+      await axios.post("/lost-items", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`, // 👈 required for verifyToken middleware
         },
       });
 
       alert("✅ Lost item posted successfully!");
-      console.log(res.data);
       navigate("/dashboard");
     } catch (err) {
-      console.error("❌ Failed to post lost item:", err.response?.data || err.message);
+      console.error(
+        "❌ Failed to post lost item:",
+        err.response?.data || err.message
+      );
       alert("Failed to post lost item");
     }
   };
@@ -47,6 +49,7 @@ const PostLostItem = () => {
   return (
     <div className="post-lost-container">
       <h2>Post Lost Item</h2>
+
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -55,18 +58,21 @@ const PostLostItem = () => {
           onChange={(e) => setItemName(e.target.value)}
           required
         />
+
         <textarea
           placeholder="Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
         />
+
         <input
           type="date"
           value={dateLost}
           onChange={(e) => setDateLost(e.target.value)}
           required
         />
+
         <input
           type="text"
           placeholder="Location"
@@ -74,20 +80,20 @@ const PostLostItem = () => {
           onChange={(e) => setLocation(e.target.value)}
           required
         />
+
         <input
           type="file"
           accept="image/*"
           onChange={(e) => setImage(e.target.files[0])}
           required
         />
+
         <button type="submit">Post Item</button>
       </form>
-      <button
-      style={{ marginTop: "20px" }}
-      onClick={() => navigate("/dashboard")}
-    >
-      Back to Home
-    </button>
+
+      <button style={{ marginTop: "20px" }} onClick={() => navigate("/dashboard")}>
+        Back to Home
+      </button>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../utils/axios"; 
+
 import "./Login.css"; // CSS file we'll define below
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -19,7 +20,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/login", formData);
+      const res = await axios.post("/login", formData);
+
       console.log("✅ Logged in:", res.data);
       alert("Login successful!");
       const token = res.data.token;
