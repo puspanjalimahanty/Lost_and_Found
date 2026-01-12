@@ -1,4 +1,5 @@
 const express = require("express");
+const fs = require("fs");
 const router = express.Router();
 const {
   createLostItem,
@@ -10,10 +11,15 @@ const multer = require("multer");
 const path = require("path");
 const verifyToken = require("../middleware/authMiddleware");
 
+const uploadDir = "uploads/lost-items";
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
 // Multer config
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/lost-items");
+    cb(null, "uploadDir");
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
