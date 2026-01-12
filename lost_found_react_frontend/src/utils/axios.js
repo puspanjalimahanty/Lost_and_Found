@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:5000/api", // adjust as needed
+  baseURL: "https://findmystuff-backend.onrender.com/api", // adjust as needed
 });
 
 export default instance;
