@@ -1,0 +1,33 @@
+/* src/pages/ReportedItems.css */
+.reported-items-container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #fefefe;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.reported-items-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.report-list {
+  list-style: none;
+  padding: 0;
+}
+
+.report-list li {
+  padding: 15px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+
+.report-list li:last-child {
+  border-bottom: none;
+}
+
+.report-list h3 {
+  margin: 0 0 5px;
+}
